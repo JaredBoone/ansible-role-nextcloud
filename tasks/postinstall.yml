@@ -84,6 +84,7 @@
   become: true
   become_user: apache
   ignore_errors: true
+  tags: regex
 
 - name: install - update the systems data-fingerprint after a backup is restored
   command: 'php {{ nextcloud_install_dir }}/occ maintenance:data-fingerprint'
