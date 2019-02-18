@@ -9,7 +9,3 @@
 # backup
 - include_tasks: 'backup.yml'
   tags: [ 'never', 'backup' ]
-
-# upgrade
-- include_tasks: 'upgrade.yml'
-  tags: [ 'never', 'upgrade' ]
