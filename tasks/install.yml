@@ -22,7 +22,6 @@
     src: '{{ nextcloud_repo_url  }}/{{ nextcloud_version }}.zip'
     remote_src: true
     dest: '{{ nextcloud_webserver_document_root }}'
-    extra_opts: [--strip-components=1]    
   when: nextcloud_new_installation.changed
 
 - name: install - move nextcloud to nextcloud_install_dir
