@@ -25,7 +25,7 @@
   when: nextcloud_new_installation.changed
 
 - name: install - move nextcloud to nextcloud_install_dir
-  command: mv {{ nextcloud_webserver_document_root }}/nextcloud {{ nextcloud_install_dir }}
+  command: mv -T {{ nextcloud_webserver_document_root }}/nextcloud {{ nextcloud_install_dir }}
   when: nextcloud_new_installation.changed
 
 - name: install - ensure directories exist with correct permissions
