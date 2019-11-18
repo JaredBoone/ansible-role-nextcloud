@@ -21,6 +21,7 @@
     src: '{{ nextcloud_repo_url  }}/{{ nextcloud_version }}.zip'
     remote_src: true
     dest: '{{ nextcloud_install_dir }}'
+    extra_opts: [--strip-components=1]    
   when: nextcloud_new_installation.changed
 
 - name: ensure directories exist with correct permissions
