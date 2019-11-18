@@ -11,6 +11,11 @@
     state: directory
   register: nextcloud_new_installation
 
+- name: general | install unzip
+  yum: 
+    name: unzip
+    state: present
+
 - name: install - ensure nextcloud is unarchived in {{ nextcloud_install_dir }}
   unarchive:
     src: '{{ nextcloud_repo_url  }}/{{ nextcloud_version }}.zip'
