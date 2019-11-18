@@ -1,6 +1,7 @@
 ---
 # install.yml
-- selinux:
+- name: install - disable selinux
+  selinux:
     state: disabled
 
 - name: install - check if {{ nextcloud_install_dir }} is present
@@ -11,7 +12,7 @@
     state: directory
   register: nextcloud_new_installation
 
-- name: general | install unzip
+- name: install - install unzip
   yum: 
     name: unzip
     state: present
@@ -20,11 +21,15 @@
   unarchive:
     src: '{{ nextcloud_repo_url  }}/{{ nextcloud_version }}.zip'
     remote_src: true
-    dest: '{{ nextcloud_install_dir }}'
+    dest: '{{ nextcloud_webserver_document_root }}'
     extra_opts: [--strip-components=1]    
   when: nextcloud_new_installation.changed
 
-- name: ensure directories exist with correct permissions
+- name: install - move nextcloud to nextcloud_install_dir
+  command: mv {{ nextcloud_webserver_document_root }}/nextcloud {{ nextcloud_install_dir }}
+  when: nextcloud_new_installation.changed
+
+- name: install - ensure directories exist with correct permissions
   file:
     path: '{{ nextcloud_install_dir }}'
     owner: apache
@@ -33,7 +38,7 @@
     recurse: true
   tags: permissions
 
-- name: ensure directories exist with correct permissions
+- name: install - ensure directories exist with correct permissions
   file:
     path: '{{ item  }}'
     owner: apache
