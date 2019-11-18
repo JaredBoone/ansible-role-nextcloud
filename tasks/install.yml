@@ -17,7 +17,7 @@
     name: unzip
     state: present
 
-- name: install - ensure nextcloud is unarchived in {{ nextcloud_install_dir }}
+- name: install - unarchive nextcloud
   unarchive:
     src: '{{ nextcloud_repo_url  }}/{{ nextcloud_version }}.zip'
     remote_src: true
